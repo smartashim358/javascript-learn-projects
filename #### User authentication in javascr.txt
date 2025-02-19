@@ -1,0 +1,35 @@
+#### User authentication in javascript >>>>>>>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class User{
+            constructor(username,password){
+                this.username = username;
+                this.password =  password;
+                this.LoginIN = false;
+            }
+            login(inputpassword){
+                if(this.password ===inputpassword){
+                    this.LoginIN =true;
+                    console.log(`${this.username} logged in successfully`);
+                }else{
+                    console.log("Invalid password");
+                }
+            }
+            logout(){
+                this.LoginIN = false;
+                console.log(`${this.username} logged out`);
+            }
+        }
+        const user1 = new User("john doe" ,"ashim123nep");
+        user1.login("ashim123nep");
+        user1.logout();
+    </script>
+</body>
+</html>
