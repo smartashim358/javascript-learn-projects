@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // A simple bank account system
+        class BankAccount{
+            #balance ;
+            constructor(owner,balance){
+                this.owner = owner;
+                this.#balance = balance;
+
+            }
+            //deposit,withdraw and viewBalance are methods 
+            deposit(amount){
+                this.#balance +=amount;
+                console.log(`your deposite amount:${amount},New balance after deposit:${this.#balance}`);
+            }
+            withdraw(amount){
+                if(amount>this.#balance){
+                    console.log("insufficient balance!");
+                }else{
+                    this.#balance -=amount;//compound assignment operator
+                    console.log(`your withdrawal amount:${amount},New balance after withdraw:${this.#balance}`);
+                }
+            }
+            viewBalance(){
+                console.log(`your total balance is ${this.#balance}`);
+            }
+            
+        }
+        const account  = new BankAccount("smartashim",1000);
+        account.deposit(500);//balance:$1500
+        account.withdraw(1000);//balance :$500
+        account.viewBalance();//balance:$500
+        //Result of this project:
+        /*your deposite amount:500,New balance after deposit:1500
+          your withdrawal amount:1000,New balance after withdraw:500
+    your total balance is 500 */
+    </script>
+</body>
+</html>
