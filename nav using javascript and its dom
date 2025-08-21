@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        const nav = document.createElement('nav');
+        nav.id = 'mainnav';
+         document.body.appendChild(nav);
+      
+        const div = document.createElement('div');
+         div.id="content";
+        const h1 = document.createElement('h1');
+        h1.textContent="Welcome to our website";
+        div.appendChild(h1);
+        const p = document.createElement('p');
+        p.textContent="Select a country from the navigation menu to learn more."
+        div.appendChild(p);
+       
+        document.body.appendChild(div);
+        
+        const countries = [
+            { name: "United States", code: "US", continent: "North America", population: "331M" },
+            { name: "Canada", code: "CA", continent: "North America", population: "38M" },
+            { name: "United Kingdom", code: "GB", continent: "Europe", population: "67M" },
+            { name: "Japan", code: "JP", continent: "Asia", population: "125M" },
+            { name: "Australia", code: "AU", continent: "Oceania", population: "26M" },
+            { name: "Brazil", code: "BR", continent: "South America", population: "213M" }
+        ];
+        function generateNavigation(){
+        const nav1 = document.getElementById('mainnav');
+          const ul = document.createElement('ul');
+            
+          countries.forEach(country=> {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+
+          a.textContent = country.name;
+          a.href='#';
+          a.onclick = function() {
+              countryInfoShow(country);
+              return false;
+            };
+            li.appendChild(a);
+            ul.appendChild(li);
+          });
+          nav1.appendChild(ul);
+          
+        }
+        
+        function countryInfoShow(country){
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = `
+            <h1>${country.name}</h1>
+            <p><strong>Country Code:</strong>${country.code} </p>
+            <p><strong>Continent:</strong>${country.continent}</p>
+            <p><strong>Population:</strong>${country.population}</p>
+            <p><a href='#' onclick="goBack()"> <- back to Home </a></p> 
+            `;
+        }
+         function goBack(){
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = `
+             <h1>Welcome to our Website</h1>
+                <p>Select a country from the navigation menu to learn more.</p>
+            
+            `;
+         }
+        
+        
+        
+        window.onload = generateNavigation;
+         
+    </script>
+</body>
+</html>
