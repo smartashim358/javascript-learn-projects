@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const style = document.createElement('style');
+        style.textContent=`
+         body{
+         font-family:Arial;
+         margin:0;
+         padding:0;
+         box-sizing:border-box;
+         background-color:black;
+         
+         }
+         .container{
+          text-align:center;
+          background-color:gray;
+          border:1px solid black;
+          margin:auto;
+          padding:23px;
+          margin-top:45px;
+          border-radius:20%;
+          box-shadow:3px 4px 5px black;
+          width:300px;
+          height:100px;
+         
+         }
+          #increament{
+           padding:12px;
+           margin-left:12px;
+           background-color:lightseagreen;
+           font-size:18px;
+           margin-top:23px;
+           color:white;
+          }
+           #decreament{
+            padding:12px;
+           margin-right:8px;
+           background-color:red;
+           font-size:18px;
+           color:white;
+           }
+           span#counter{
+           padding:34px;
+           color:white;
+           font-size:18px;
+           }
+           #increament:hover{
+           
+           background-color:green;
+    } 
+           #decreament:hover{
+           background-color:#8b0000;
+           
+           };
+           `;
+        document.head.appendChild(style);
+
+        const div = document.createElement('div');
+        div.className = "container";
+        const increamentBtn = document.createElement('button');
+        increamentBtn.id ="increament";
+        increamentBtn.textContent = '+';
+        const span = document.createElement('span');
+        span.id="counter";
+        span.className ="counter-display";
+        span.textContent = 0;
+        const decreamentBtn = document.createElement('button');
+        decreamentBtn.id="decreament";
+        decreamentBtn.textContent = '-';
+        div.appendChild(increamentBtn);
+        div.appendChild(span);
+        div.appendChild(decreamentBtn);
+        document.body.appendChild(div);
+        let counterValue=0;
+        function updateDisplay(){
+           span.textContent = counterValue;
+        }
+        increamentBtn.addEventListener('click', ()=>{
+            counterValue++;
+            updateDisplay();
+        });
+        decreamentBtn.addEventListener('click', ()=>{
+            counterValue--;
+            updateDisplay();
+        });
+    </script>
+</body>
+</html>
