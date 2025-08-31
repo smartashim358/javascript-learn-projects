@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container" class="container">
+        <div class="box"> 1</div>
+        <div class="box"> 2</div>
+        <div class="box"> 3</div>
+    </div>
+    <button  class="btn" id="addBtn">Add Box</button>
+    <button class="btn" id="deleteBtn">Delete last box</button>
+    <button class="btn" id="clearBtn">clear All</button>
+    <script>
+        const style = document.createElement('style');
+        style.textContent=`
+        .container{
+         display:flex;
+         gap:10px;
+         flex-wrap:wrap;
+         margin-bottom:20px;
+        }
+         .box{
+         height:100px;
+         width:100px;
+         background-color:lightblue;
+         justify-content:center;
+         align-items:center;
+         display:flex;
+         border-radius:8px;
+         
+         }
+         .btn{
+         padding:12px 20px;
+         background-color:green;
+         color:white;
+         border-radius:8px;
+         font-family:Arial;
+         cursor:pointer;
+         font-weight:500;
+         font-size:18px;
+        }
+     
+        `;
+     const addBtn = document.getElementById('addBtn');
+     const deleteBtn = document.getElementById('deleteBtn');
+     const clearBtn = document.getElementById('clearBtn');
+     const container = document.getElementById('container');
+     let count=4;
+     addBtn.addEventListener('click',()=>{
+      const div = document.createElement('div');
+      div.className='box';
+      div.textContent=count++;
+      container.appendChild(div);
+
+     });
+     deleteBtn.addEventListener('click', ()=>{
+        const boxes = document.querySelectorAll('.box');
+        if(boxes.length>0)
+        boxes[boxes.length-1].remove(); 
+     });
+     clearBtn.addEventListener('click', ()=>{
+        container.innerHTML = " ";
+        count=1;
+     });
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
