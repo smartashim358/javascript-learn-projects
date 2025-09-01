@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container" id="container">
+        <img id="img">
+        <div class="mydiv" id="div">The  restrictions which  we applied  on domain  are know 
+             as domain  constraints . these   restrictions  are applied to every value
+     value  of attribute  . By following  these  constraints  you can  keep  consistency  in database </div>
+    <button class="btn" id="btn">View</button>
+    </div>
+    <script>
+    const style=document.createElement('style');
+    style.textContent=`
+    body{
+    margin:0;
+    padding:0;
+    }
+    .container{
+     border:1px solid black;
+     width:350px;  
+     height:450px;
+     margin:12px 16px;
+     padding:20px;
+     background-color:#1f2937;
+     color:white;
+    border-radius:12px;
+    box-shadow: 2px 3px 4px gray;
+    text-align:center;
+
+    
+    }
+    .myimg{
+     margin-top:12px;
+     border-radius:20px;
+     box-shadow:2px 3px 5px white;
+     margin-bottom:23px;
+    }
+     .mydiv{
+     font-size:18px;
+     font-family:Arial;
+     text-shadow:1px 2px 3px cyan;
+     
+     }
+     .btn{
+     padding:10px 18px;
+     border:none;
+     border-radius:8px;
+     background-color:#2563EB;
+     color:white;
+     margin:40px auto;
+     font-size:18px;
+     cursor:pointer;
+     trasition:0.3s ease all;
+     }
+    
+     `;
+     document.head.appendChild(style); 
+    
+    const container = document.getElementById('container');
+    
+
+    const img = document.getElementById('img');
+    img.setAttribute('src','flower.jpg');
+    img.alt ="flower picture";
+    img.className="myimg";
+    img.style.width="300px";
+    img.style.height="200px";
+    
+
+    const div = document.getElementById('div');
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click',()=>{
+        const link = document.createElement('a');
+         alert('you can view About nepal');
+       window.open('https://duckduckgo.com/?q=article+about+nepal&ia=web');
+        
+    });
+   
+    
+    
+    
+    
+    </script>
+</body>
+</html>
