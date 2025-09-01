@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Utility Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f3f4f6;
+      color: #111827;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    #addBtn { background: #2563EB; color: white; }
+    #clearBtn { background: #DC2626; color: white; }
+    #copyBtn { background: #16A34A; color: white; }
+    #toggleBtn { background: #F59E0B; color: white; }
+    #downloadBtn { background: #7C3AED; color: white; }
+    ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+    li {
+      margin: 5px 0;
+      padding: 6px;
+      background: #f9fafb;
+      border-radius: 6px;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: calc(100% - 100px);
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>⚡ Button Utility Dashboard</h1>
+  <div class="container">
+
+    <!-- Add & Clear -->
+    <div class="section">
+      <h3>📝 Todo List</h3>
+      <button id="addBtn">Add Item</button>
+      <button id="clearBtn">Clear List</button>
+      <ul id="list"></ul>
+    </div>
+
+    <!-- Copy -->
+    <div class="section">
+      <h3>📋 Copy to Clipboard</h3>
+      <input type="text" id="copyInput" value="Hello from Nepal!">
+      <button id="copyBtn">Copy</button>
+    </div>
+
+    <!-- Toggle -->
+    <div class="section">
+      <h3>👀 Show / Hide Content</h3>
+      <p id="para">Nepal is a beautiful country with mountains, culture, and nature.</p>
+      <button id="toggleBtn">Hide</button>
+    </div>
+
+    <!-- Download -->
+    <div class="section">
+      <h3>⬇️ Download Text</h3>
+      <button id="downloadBtn">Download File</button>
+    </div>
+
+  </div>
+
+  <script>
+    // Add Item
+    const addBtn = document.getElementById("addBtn");
+    const list = document.getElementById("list");
+    addBtn.addEventListener("click", () => {
+      const li = document.createElement("li");
+      li.textContent = "New Item " + (list.children.length + 1);
+      list.appendChild(li);
+    });
+
+    // Clear List
+    const clearBtn = document.getElementById("clearBtn");
+    clearBtn.addEventListener("click", () => {
+      list.innerHTML = "";
+    });
+
+    // Copy Text
+    const copyBtn = document.getElementById("copyBtn");
+    const copyInput = document.getElementById("copyInput");
+    copyBtn.addEventListener("click", () => {
+      copyInput.select();
+      document.execCommand("copy");
+      alert("Copied: " + copyInput.value);
+    });
+
+    // Show / Hide
+    const toggleBtn = document.getElementById("toggleBtn");
+    const para = document.getElementById("para");
+    toggleBtn.addEventListener("click", () => {
+      if (para.style.display === "none") {
+        para.style.display = "block";
+        toggleBtn.textContent = "Hide";
+      } else {
+        para.style.display = "none";
+        toggleBtn.textContent = "Show";
+      }
+    });
+
+    // Download File
+    const downloadBtn = document.getElementById("downloadBtn");
+    downloadBtn.addEventListener("click", () => {
+      const blob = new Blob(["Hello from Nepal! This is your downloaded file."], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "nepal.txt";
+      link.click();
+    });
+  </script>
+</body>
+</html>
