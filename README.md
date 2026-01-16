@@ -338,9 +338,9 @@ You are free to use, copy, modify, and distribute with attribution. See `LICENSE
 
 ## Author
 
-**Ashim Nepali** (aka **smartashim358**)  
+**Ashim Nepali** ( **smartashim358**)  
 - Focus: JavaScript fundamentals, Java backend, blockchain & cybersecurity learning.  
 - GitHub: https://github.com/smartashim358  
-- Email: _add your preferred contact_
+- Email: ashimnepali358@gmail.com
 
 > If you use or learn from this repo, ⭐️ star it and share feedback—contributions and suggestions are most welcome!
