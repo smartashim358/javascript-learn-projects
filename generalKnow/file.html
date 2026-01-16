@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2 style="margin-bottom:12px;">To <span style="color:orange;">Do</span> List</h2>
+  <div class="container"> 
+    
+  <input type="text" id="input" placeholder="Enter item">
+  <button id="addBtn">Add Item</button>
+</div>
+  <ul id="list"></ul>
+  <script>
+    const input = document.getElementById('input');
+    const addBtn = document.getElementById('addBtn');
+    const list  = document.getElementById('list');
+    addBtn.addEventListener('click', ()=>{
+      const value = input.value.trim();
+      if(value ===""){
+        alert("please enter  something");
+        return;
+      }
+      const li = document.createElement('li');
+      li.textContent = value;
+      const delBtn = document.createElement('button');
+      delBtn.textContent ="Delete";
+      delBtn.style.marginLeft = '10px';
+      delBtn.className ='delete';
+      li.appendChild(delBtn);
+      list.appendChild(li);
+      input.value =" ";
+    });
+    list.addEventListener('click',(e)=>{
+      if(e.target.classList.contains('delete')){
+        e.target.parentElement.remove();
+      }
+    });
+    const style = document.createElement('style');
+    style.textContent =`
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    }
+    body{
+     display:flex;
+     flex-direction:column;
+     justify-content:center;
+     align-items:center;
+     height:100vh;
+     background-color:#eee;
+     font-family:sans-serif;
+    }
+     input{
+    padding:15px 20px;
+    border-radius:12px;
+    border:none;
+    background:white;
+    color:black;
+    font-size:18px;
+    }
+    #addBtn{
+    padding:15px 14px;
+    background:blue;
+    color:white;
+    font-weight:bold;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    transitin:background-color 0.4s ease;
+    
+    }
+    #addBtn:hover{
+    background-color:dodgerblue;
+    }
+    .container{
+    display:flex;
+    gap:15px;
+    background:rgba(0,0,0,0.3);
+    border-radius:12px;
+    padding:12px;
+    }
+    #list{
+    list-style-type:none;
+    margin-top:23px;
+    font-size:20px;
+    font-weight:bold;
+    text-transform: capitalize;
+    background:rgba(0,0,0,0.4);
+    padding:12px;
+    border-radius:12px;
+    max-width:500px;
+    width:400px;
+    height:auto;
+    text-align:center;
+    }
+    #list>li{
+    margin-top:13px;
+    }
+    .delete{
+    padding:10px 12px;
+    background:lime;
+    border-radius:10px;
+    color:white;
+    cursor:pointer
+    font-weight:bold;
+    border:none;
+    transition:background-color 0.3 ease;
+   }
+    .delete:hover{
+    background-color:red;
+    }
+    
+    `;
+    document.head.appendChild(style);
+
+  </script>
+</body>
+</html>

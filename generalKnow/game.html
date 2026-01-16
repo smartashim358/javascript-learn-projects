@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+        <canvas id="gameCanvas" width="500" height="400" style="border:1px solid black"></canvas>
+<script>
+let canvas = document.getElementById("gameCanvas");
+let ctx = canvas.getContext("2d");
+
+// Ball variables
+let x = 50, y = 50;
+let dx = 2, dy = 2;
+let radius = 20;
+
+// Rectangle variables
+let rectX = 200, rectY = 200, size = 50;
+let speed = 5;
+
+// Draw Ball
+function drawBall() {
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, Math.PI * 2);
+  ctx.fillStyle = "blue";
+  ctx.fill();
+  ctx.closePath();
+}
+
+// Draw Rectangle
+function drawRect() {
+  ctx.fillStyle = "red";
+  ctx.fillRect(rectX, rectY, size, size);
+}
+
+// Update frame
+function update() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Move ball
+  x += dx;
+  y += dy;
+
+  // Bounce on walls
+  if (x + radius > canvas.width || x - radius < 0) dx *= -1;
+  if (y + radius > canvas.height || y - radius < 0) dy *= -1;
+
+  // Draw objects
+  drawBall();
+  drawRect();
+
+  // ✅ Collision Detection
+  if (x + radius > rectX && x - radius < rectX + size &&
+      y + radius > rectY && y - radius < rectY + size) {
+    console.log("Collision! 🔥");
+    ctx.fillStyle = "red";
+    ctx.font = "30px Arial";
+    ctx.fillText("Collision!", 10, 20);
+  }
+
+  requestAnimationFrame(update);
+}
+
+// Keyboard controls for rectangle
+document.addEventListener("keydown", function(e) {
+  if (e.key === "ArrowUp") rectY -= speed;
+  if (e.key === "ArrowDown") rectY += speed;
+  if (e.key === "ArrowLeft") rectX -= speed;
+  if (e.key === "ArrowRight") rectX += speed;
+});
+
+update();
+</script>
+
+</body>
+</html>

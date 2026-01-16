@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .todo-container {
+      background: #fff;
+      padding: 20px;
+      width: 400px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2563EB;
+    }
+    .todo-input {
+      display: flex;
+      gap: 10px;
+    }
+    .todo-input input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+    }
+    .todo-input button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      background: #2563EB;
+      color: white;
+      cursor: pointer;
+    }
+    .todo-input button:hover {
+      background: #1D4ED8;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+    li {
+      padding: 10px;
+      background: #f9fafb;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .actions button {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      margin-left: 8px;
+      font-size: 14px;
+    }
+    .actions .delete {
+      color: #DC2626;
+    }
+    .actions .edit {
+      color: #F59E0B;
+    }
+  </style>
+</head>
+<body>
+  <div class="todo-container">
+    <h1>My To-Do List</h1>
+    <div class="todo-input">
+      <input type="text" placeholder="Enter a task..." id="taskInput">
+      <button id="addTaskBtn">Add</button>
+    </div>
+    <ul id="taskList">
+      <!-- tasks will go here -->
+      <!-- <li>Sample Task <div class="actions"><button class="edit">Edit</button><button class="delete">Delete</button></div></li> -->
+    </ul>
+  </div>
+
+  <script>
+    // just skeleton JS
+    const addBtn = document.getElementById("addTaskBtn");
+    const taskInput = document.getElementById("taskInput");
+    const taskList = document.getElementById("taskList");
+
+    addBtn.addEventListener("click", () => {
+      const taskText = taskInput.value.trim();
+      if(taskText !== ""){
+        const li = document.createElement("li");
+        li.textContent = taskText;
+        taskList.appendChild(li);
+        taskInput.value = "";
+      }
+    });
+  </script>
+</body>
+</html>

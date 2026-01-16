@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="mycanvas" width="1200" height="600" style="border:1px solid black;"></canvas>
+  <script>
+    const canvas = document.getElementById('mycanvas');
+    const ctx = canvas.getContext("2d");
+    // Create radial gradient: inner circle (center), outer circle (edges)
+   /*ctx.beginPath();
+   ctx.moveTo(80,80);
+   ctx.lineTo(180,80);
+   ctx.lineTo(130,20);
+   ctx.closePath();
+   ctx.fillStyle = "yellow";
+   ctx.fill();  
+   */
+    let x = 100, y = 100;   // position
+    let dx = 3, dy = 2;     // speed in x & y
+    const radius = 30;
+
+    function drawBall() {
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = "skyblue";
+      ctx.fill();
+    }
+
+    function update() {
+      // clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // draw ball
+      drawBall();
+
+      // move
+      x += dx;
+      y += dy;
+
+      // bounce on walls
+      if (x + radius > canvas.width || x - radius < 0) dx *= -1;
+      if (y + radius > canvas.height || y - radius < 0) dy *= -1;
+
+      requestAnimationFrame(update); // loop again
+    }
+
+    update(); // start
+  </script>
+</body>
+</html>

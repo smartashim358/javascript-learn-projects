@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country API Playground</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #222;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    select, input, button {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+    }
+    button {
+      background: #ff9800;
+      color: white;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      width: 100%;
+      max-width: 900px;
+    }
+    .card {
+      background: #333;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    img {
+      max-width: 100px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌍 Country API Playground</h1>
+
+  <div>
+    <select id="type">
+      <option value="name">By Name</option>
+      <option value="region">By Region</option>
+      <option value="lang">By Language</option>
+      <option value="currency">By Currency</option>
+    </select>
+    <input type="text" id="value" placeholder="Enter search value">
+    <button onclick="getCountries()">Search</button>
+  </div>
+
+  <div class="results" id="results">
+    <p>Choose a type and search 🔍</p>
+  </div>
+
+  <script>
+    async function getCountries() {
+      const type = document.getElementById("type").value;
+      const value = document.getElementById("value").value.trim();
+      if (!value) return;
+
+      const url = `https://restcountries.com/v3.1/${type}/${value}`;
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("No results found");
+        const data = await res.json();
+
+        document.getElementById("results").innerHTML = data.map(country => `
+          <div class="card">
+            <img src="${country.flags.svg}" alt="Flag">
+            <h3>${country.name.common}</h3>
+            <p><b>Capital:</b> ${country.capital ? country.capital[0] : "N/A"}</p>
+            <p><b>Population:</b> ${country.population.toLocaleString()}</p>
+            <p><b>Region:</b> ${country.region}</p>
+          </div>
+        `).join("");
+      } catch (error) {
+        document.getElementById("results").innerHTML = `<p>❌ ${error.message}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>

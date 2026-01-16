@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Select with Placeholder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .description {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .select-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        
+        select {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: white;
+            appearance: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        .select-container::after {
+            content: "▼";
+            font-size: 12px;
+            color: #7f8c8d;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        
+        .placeholder-option {
+            color: #95a5a6;
+        }
+        
+        .selected-value {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        
+        .selected-value span {
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+        .instructions {
+            margin-top: 30px;
+            padding: 15px;
+            background: #e8f4fc;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 14px;
+        }
+        
+        .instructions h3 {
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .instructions code {
+            background: #d6eaf8;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Country Selection</h1>
+        <p class="description">Select your country from the dropdown below. The first option acts as a placeholder.</p>
+        
+        <div class="select-container">
+            <select id="countrySelect">
+                <!-- Options will be added by JavaScript -->
+            </select>
+        </div>
+        
+        <div class="selected-value">
+            Selected country: <span id="selectedCountry">None</span>
+        </div>
+        
+        <div class="instructions">
+            <h3>How it works:</h3>
+            <p>This select element uses JavaScript to:</p>
+            <ol>
+                <li>Create a placeholder option with <code>disabled</code> and <code>selected</code> attributes</li>
+                <li>Generate country options from an array of countries</li>
+                <li>Update the display when a selection is made</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const countrySelect = document.getElementById('countrySelect');
+            const selectedCountry = document.getElementById('selectedCountry');
+            
+            // Array of countries
+            const countries = [
+                "United States", "Canada", "United Kingdom", "Australia", "Germany",
+                "France", "Japan", "Brazil", "India", "China", "Mexico", "Italy",
+                "South Korea", "Spain", "Russia", "South Africa", "Argentina", "Egypt"
+            ];
+            
+            // Create and add the placeholder option
+            const placeholderOption = document.createElement('option');
+            placeholderOption.textContent = "Select your country";
+            placeholderOption.value = "";
+            placeholderOption.disabled = true;
+            placeholderOption.selected = true;
+            placeholderOption.className = "placeholder-option";
+            countrySelect.appendChild(placeholderOption);
+            
+            // Add countries to the select element
+            countries.sort().forEach(country => {
+                const option = document.createElement('option');
+                option.value = country.toLowerCase().replace(/\s+/g, '-');
+                option.textContent = country;
+                countrySelect.appendChild(option);
+            });
+            
+            // Add event listener to handle selection
+            countrySelect.addEventListener('change', function() {
+                if (this.value) {
+                    selectedCountry.textContent = this.options[this.selectedIndex].textContent;
+                    this.classList.remove('placeholder-option');
+                } else {
+                    selectedCountry.textContent = "None";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

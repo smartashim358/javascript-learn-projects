@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quotes Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 40px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+      background: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <h1>📜 Quotes Generator</h1>
+  <button id="generateBtn">Generate Quote</button>
+  <div id="output">Your quote will appear here...</div>
+
+  <script>
+    const quotes = [
+      "🌟 Believe in yourself and all that you are.",
+      "💡 The future depends on what you do today.",
+      "🔥 Push yourself, because no one else is going to do it for you.",
+      "🚀 Dream big. Start small. Act now.",
+      "💪 Don’t stop until you’re proud.",
+      "🌈 Every day is a second chance.",
+      "🏆 Success is the sum of small efforts repeated daily."
+    ];
+
+    const output = document.getElementById("output");
+    const btn = document.getElementById("generateBtn");
+
+    btn.addEventListener("click", () => {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      output.textContent = quotes[randomIndex];
+    });
+  </script>
+</body>
+</html>

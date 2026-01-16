@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Country Info List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .item {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 250px;
+    }
+    .item li {
+      padding: 10px;
+      background: #4caf50;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-align: center;
+    }
+    .item li:hover {
+      background: #45a049;
+      transform: scale(1.05);
+    }
+    .info-box {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f0f0f0;
+      border-radius: 10px;
+      font-size: 16px;
+      min-height: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  // Countries list
+  const countries = [
+    "Nepal",
+    "India",
+    "United States",
+    "Canada",
+    "Japan"
+  ];
+
+  // Info about each country
+  const countryInfo = {
+    "Nepal": "Nepal is famous for Mount Everest and the birthplace of Lord Buddha.",
+    "India": "India is known for its diverse culture, Taj Mahal, and IT industry.",
+    "United States": "The USA is known for technology, Hollywood, and the Statue of Liberty.",
+    "Canada": "Canada is famous for Niagara Falls, maple syrup, and its friendly people.",
+    "Japan": "Japan is famous for anime, sushi, and advanced technology."
+  };
+
+  // Create UL
+  const ul = document.createElement('ul');
+  ul.className = "item";
+
+  countries.forEach(country => {
+    const li = document.createElement('li');
+    li.textContent = country;
+    ul.appendChild(li);
+  });
+
+  // Info box
+  const infoBox = document.createElement('div');
+  infoBox.className = "info-box";
+  infoBox.textContent = "Click a country to see details...";
+
+  // Add event listener
+  ul.addEventListener('click', (e) => {
+    if (e.target.tagName === 'LI') {
+      const country = e.target.textContent;
+      infoBox.textContent = countryInfo[country] || "No info available.";
+    }
+  });
+
+  // Add to page
+  document.body.appendChild(ul);
+  document.body.appendChild(infoBox);
+</script>
+
+</body>
+</html>

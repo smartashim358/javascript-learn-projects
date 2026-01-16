@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Info Finder</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    h1 {
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    }
+    .card {
+      background: rgba(0,0,0,0.5);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+      margin-top: 20px;
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      width: 70%;
+      font-size: 1rem;
+    }
+    button {
+      padding: 10px 15px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 10px;
+      background: #ff9800;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    img {
+      max-width: 150px;
+      border-radius: 10px;
+      margin: 15px 0;
+    }
+    p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌍 Country Info Finder</h1>
+
+  <div>
+    <input type="text" id="countryInput" placeholder="Enter country name">
+    <button onclick="getCountry()">Search</button>
+  </div>
+
+  <div class="card" id="result">
+    <p>Search for a country above 👆</p>
+  </div>
+
+  <script>
+    async function getCountry() {
+      const countryName = document.getElementById("countryInput").value.trim();
+      if (!countryName) return;
+
+      // removed fullText=true → allows partial matches
+      const url = `https://restcountries.com/v3.1/name/${countryName}`;
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Country not found");
+        const data = await res.json();
+
+        // Show the first match
+        const country = data[0];
+        const flag = country.flags.svg;
+        const name = country.name.common;
+        const capital = country.capital ? country.capital[0] : "N/A";
+        const population = country.population.toLocaleString();
+        const region = country.region;
+        const language = country.languages ? Object.values(country.languages)[0] : "N/A";
+        const currency = country.currencies ? Object.values(country.currencies)[0].name : "N/A";
+
+        document.getElementById("result").innerHTML = `
+          <img src="${flag}" alt="Flag of ${name}">
+          <h2>${name}</h2>
+          <p><b>Capital:</b> ${capital}</p>
+          <p><b>Population:</b> ${population}</p>
+          <p><b>Region:</b> ${region}</p>
+          <p><b>Language:</b> ${language}</p>
+          <p><b>Currency:</b> ${currency}</p>
+        `;
+      } catch (error) {
+        document.getElementById("result").innerHTML = `<p>❌ ${error.message}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>

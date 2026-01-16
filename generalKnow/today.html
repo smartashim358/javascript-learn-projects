@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM ClassList Project</title>
+  <style>
+    .container {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: lightblue;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    .highlight {
+      border: 3px solid orange;
+      transform: scale(1.1);
+      background-color: lightcoral;
+    }
+    button {
+      padding: 10px 16px;
+      margin-right: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Dynamic Box Highlighter Project</h2>
+<div class="container" id="container">
+  <div class="box">1</div>
+  <div class="box">2</div>
+  <div class="box">3</div>
+</div>
+
+<button id="addBox">Add Box</button>
+<button id="removeHighlight">Remove Highlighted</button>
+
+<script>
+const container = document.getElementById('container');
+const addBtn = document.getElementById('addBox');
+const removeBtn = document.getElementById('removeHighlight');
+
+// Event delegation: toggle highlight on click
+container.addEventListener('click', (e) => {
+  if (e.target.classList.contains('box')) {
+    e.target.classList.toggle('highlight'); // toggles highlight class
+  }
+});
+
+// Add new box dynamically
+let count = 4;
+addBtn.addEventListener('click', () => {
+  const div = document.createElement('div');
+  div.className = 'box';
+  div.textContent = count++;
+  container.appendChild(div);
+});
+
+// Remove highlighted boxes
+removeBtn.addEventListener('click', () => {
+  const highlighted = document.querySelectorAll('.highlight');
+  highlighted.forEach(box => box.remove());
+});
+</script>
+
+</body>
+</html>

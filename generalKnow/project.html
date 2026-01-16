@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form Project</title>
+</head>
+<body>
+    <script>
+        // === 1. Create form container ===
+        const form = document.createElement('form');
+        form.id = 'myForm';
+        form.style.border = '1px solid #333';
+        form.style.padding = '20px';
+        form.style.width = '350px';
+        form.style.borderRadius = '10px';
+        form.style.backgroundColor = '#f5f5f5';
+        form.style.margin = '40px auto';
+        form.style.boxShadow = '2px 2px 12px rgba(0,0,0,0.2)';
+
+        // Title
+        const formTitle = document.createElement('h2');
+        formTitle.textContent = 'Contact Form';
+        formTitle.style.textAlign = 'center';
+        formTitle.style.marginBottom = '20px';
+        form.appendChild(formTitle);
+
+        // === 2. Helper function to create input fields ===
+        function createInput(labelText, type, name) {
+            const wrapper = document.createElement('div');
+            wrapper.style.marginBottom = '12px';
+
+            const label = document.createElement('label');
+            label.textContent = labelText;
+            label.setAttribute('for', name);
+            label.style.display = 'block';
+            label.style.marginBottom = '4px';
+
+            const input = document.createElement('input');
+            input.type = type;
+            input.name = name;
+            input.id = name;
+            input.style.width = '100%';
+            input.style.padding = '8px';
+            input.style.borderRadius = '4px';
+            input.style.border = '1px solid #999';
+
+            wrapper.appendChild(label);
+            wrapper.appendChild(input);
+
+            return wrapper;
+        }
+
+        // Add inputs
+        form.appendChild(createInput('Name', 'text', 'name'));
+        form.appendChild(createInput('Email', 'email', 'email'));
+        form.appendChild(createInput('Password', 'password', 'password'));
+
+        // === 3. Textarea ===
+        const msgWrapper = document.createElement('div');
+        msgWrapper.style.marginBottom = '12px';
+
+        const msgLabel = document.createElement('label');
+        msgLabel.textContent = 'Message';
+        msgLabel.setAttribute('for', 'message');
+        msgLabel.style.display = 'block';
+        msgLabel.style.marginBottom = '4px';
+
+        const textarea = document.createElement('textarea');
+        textarea.name = 'message';
+        textarea.id = 'message';
+        textarea.style.width = '100%';
+        textarea.style.height = '80px';
+        textarea.style.padding = '8px';
+        textarea.style.borderRadius = '4px';
+        textarea.style.border = '1px solid #999';
+
+        msgWrapper.appendChild(msgLabel);
+        msgWrapper.appendChild(textarea);
+        form.appendChild(msgWrapper);
+
+        // === 4. Submit button ===
+        const submitBtn = document.createElement('button');
+        submitBtn.type = 'submit';
+        submitBtn.textContent = 'Submit';
+        submitBtn.style.padding = '10px 20px';
+        submitBtn.style.border = 'none';
+        submitBtn.style.borderRadius = '6px';
+        submitBtn.style.backgroundColor = 'green';
+        submitBtn.style.color = 'white';
+        submitBtn.style.cursor = 'pointer';
+        submitBtn.style.width = '100%';
+        submitBtn.style.fontSize = '16px';
+
+        form.appendChild(submitBtn);
+
+        // === 5. Handle form submission ===
+        form.addEventListener('submit', (e) => {
+            e.preventDefault(); // prevent reload
+            const formData = new FormData(form);
+            let output = '';
+            for (const [key, value] of formData.entries()) {
+                output += `${key}: ${value}\n`;
+            }
+            alert("Form Submitted!\n\n" + output);
+            console.log("Form Data:", Object.fromEntries(formData.entries()));
+            form.reset();
+        });
+
+        // === 6. Append form to body ===
+        document.body.appendChild(form);
+    </script>
+</body>
+</html>
+
+</body>
+</html>
